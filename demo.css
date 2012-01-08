@@ -18,6 +18,8 @@ ul li span {position:relative; top:-2px;}
 label {padding-right:10px;}
 input[type=text] {margin-right:10px;}
 form table {margin-top:10px;}
+form table td {vertical-align:top;}
+form table td label {position:relative; top:3px;}
 div.modal-header {text-align:left; padding:10px 23px; background-color:#94e7f2;
 	-moz-box-shadow: inset 0 0 2px 1px #1DA1B4;
 	-webkit-box-shadow: inset 0 0 2px 1px #1DA1B4;
