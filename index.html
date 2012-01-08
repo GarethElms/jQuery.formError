@@ -16,7 +16,7 @@
                <tbody>
                   <tr>
                      <td>
-                        <label for="name">Name</label>
+                        <label for="name">* Name</label>
                      </td>
                      <td>
                         <input type="text" id="name" />
@@ -24,7 +24,7 @@
                   </tr>
                   <tr>
                      <td>
-                        <label for="age">Age</label>
+                        <label for="age">* Age</label>
                      </td>
                      <td>
                         <input type="text" id="age" />
@@ -32,7 +32,7 @@
                   </tr>
                   <tr>
                      <td>
-                        <label for="email">Email</label>
+                        <label for="email">* Email</label>
                      </td>
                      <td>
                         <input type="text" id="email" />
@@ -43,6 +43,7 @@
                      </td>
                      <td>
                         <input id="addPersonButton" type="submit" value="Add person">
+                        <br /><em class="note">* Required field</em>
                      </td>
                   </tr>
                </tbody>
@@ -98,16 +99,21 @@ var validate =
       var all =
          function()
          {
-            var isValid = true;
+            var invalidControls = [];
             for( var controlValidationMethod in validate.controls)
             {
                if( ! validate.controls[controlValidationMethod].call( $("#" + controlValidationMethod)))
                {
-                  isValid = false;
+                  invalidControls.push( controlValidationMethod);
                }
             }
 
-            return isValid;
+            if( invalidControls.length > 0)
+            {
+                // Set focus on the first erroneous control
+                $("#" + invalidControls[0]).focus();
+            }
+            return invalidControls.length == 0;
          };
 
       var controls =
@@ -136,30 +142,6 @@ var validate =
 
                return isValid;
             },
-         email:
-            function()
-            {
-               var $input = $(this);
-               var isValid = true;
-
-               if( $input.val() === "")
-               {
-                  $input.formError( "Please enter an email address");
-                  isValid = false;
-               }
-               else if( ! _regex.emailAddressIsValid( $input.val()))
-               {
-                  $input.formError( "Please enter a valid email address eg; name@example.com");
-                  isValid = false;
-               }
-               else
-               {
-                  // Valid, remove any existing form error message for this input
-                  $input.formError( {remove:true});
-               }
-                  
-               return isValid;
-            },
          age:
             function()
             {
@@ -184,6 +166,30 @@ var validate =
                   
                return isValid;
             },
+         email:
+            function()
+            {
+               var $input = $(this);
+               var isValid = true;
+
+               if( $input.val() === "")
+               {
+                  $input.formError( "Please enter an email address");
+                  isValid = false;
+               }
+               else if( ! _regex.emailAddressIsValid( $input.val()))
+               {
+                  $input.formError( "Please enter a valid email address eg; name@example.com");
+                  isValid = false;
+               }
+               else
+               {
+                  // Valid, remove any existing form error message for this input
+                  $input.formError( {remove:true});
+               }
+                  
+               return isValid;
+            }
          };
 
       return {
