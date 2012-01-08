@@ -1,12 +1,12 @@
 body {margin:0; padding:0; background-color:#DBF8F7; font-family:Arial,Helvetica,sans-serif;
 	color:#135009;}
-#container {width:600px; margin:50px auto 20px; background-color:#EBFEFD; min-height:600px;
+#container {width:400px; margin:50px auto 20px; background-color:#EBFEFD; min-height:350px;
 	border-radius:6px;
 	-moz-box-shadow: 0 0 3px 2px #1DA1B4;
 	-webkit-box-shadow: 0 0 3px 2px #1DA1B4;
 	box-shadow: 0 0 3px 2px #1DA1B4;}
 #content {padding:10px 30px 30px;}
-#footer {margin:0 auto; width:550px; font-size:70%; font-family:verdana;}
+#footer {margin:0 auto; width:350px; font-size:70%; font-family:verdana;}
 h1 {color:#085181; font-weight:normal; margin-top:0; padding:30px; background-color:#95E7F2; font-weight:normal;
 	border-bottom:1px solid #1DA1B4; box-shadow: 0 0 25px 2px #1DA1B4; font-size:150%;}
 
