@@ -1,3 +1,11 @@
+// jQuery.formError v0.1
+//
+// Copyright (C)2012 Gareth Elms
+// Distributed under MIT License
+//
+// Documentation and full license availabe at:
+// https://github.com/GarethElms/jQuery.formError
+ 
 (function( $ )
 {
    $.fn.formError =
@@ -9,7 +17,7 @@
             options.message = message;
             show.call( this, options);
          }
-         else
+        else
          {
             var options = $.extend( true, {}, $.fn.formError.defaultOptions, message);
             if( typeof( options.message) === "string")
@@ -21,7 +29,7 @@
                remove.call( this, options);
             }
          }
-
+ 
          function remove( options)
          {
             if( options.successImage.enabled)
@@ -36,11 +44,11 @@
                   removeSuccessImage.call( this);
                }
             }
-
+ 
             this.removeClass('invalid');
             this.siblings( ".validationErrorContainer").fadeOut();
          }
-
+ 
          function removeSuccessImage()
          {
             if( this.next().hasClass( "successImage"))
@@ -48,12 +56,12 @@
                this.next().fadeOut();
             }
          }
-
+ 
          function show( options)
          {
             remove.call( this, {successImage: {disabled:true}}); // Just remove the previous error message if it exists, we are replacing it now
             removeSuccessImage.call( this); // Also remove the success image if present
-
+ 
             var errorDiv =
                $("<div class='validationErrorContainer' style='position:absolute; left:101%; top:-2px;}'>" +
                    "<canvas width='14' height='14' style='position:absolute; left:-3px; top:7px;' />" +
@@ -61,33 +69,37 @@
                      options.message +
                    "</div>" +
                  "</div>");
-
+ 
             if( this.parent().hasClass( "inputContainer") == false)
             {
                this.wrap( $("<div class='inputContainer' style='position:relative;'></div>"));
             }
-
+ 
             this.after( errorDiv.fadeIn()).addClass( "invalid");
-                  
+                 
             var canvas = $("canvas", errorDiv)[0];
-            var context = canvas.getContext( "2d");
-
-            context.fillStyle = '#811';
-            context.strokeStyle = '#811';
-            context.lineWidth = 1;
-
-            context.beginPath();
-            context.moveTo(1, 7);
-            context.lineTo(13, 13);
-            context.lineTo(13, 1);
-            context.lineTo(1, 7);
-            context.closePath();
-
-            context.fill();
-            context.stroke();
+ 
+            if( typeof( canvas.getContext) == "function")
+            {
+                var context = canvas.getContext( "2d");
+ 
+                context.fillStyle = '#811';
+                context.strokeStyle = '#811';
+                context.lineWidth = 1;
+ 
+                context.beginPath();
+                context.moveTo(1, 7);
+                context.lineTo(13, 13);
+                context.lineTo(13, 1);
+                context.lineTo(1, 7);
+                context.closePath();
+ 
+                context.fill();
+                context.stroke();
+            }
          }
       };
-
+ 
    $.fn.formError.defaultOptions =
       {
          successImage:
