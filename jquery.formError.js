@@ -26,12 +26,16 @@
             }
             else if( options.remove)
             {
-               remove.call( this, options);
+               if( remove.call( this, options))
+               {
+                  this.addClass( "valid");
+               }
             }
          }
  
          function remove( options)
          {
+            var wasInErrorState = false;
             if( options.successImage.enabled)
             {
                if( this.hasClass('invalid')) //Used to be invalid
@@ -44,9 +48,13 @@
                   removeSuccessImage.call( this);
                }
             }
- 
-            this.removeClass('invalid');
+            if( this.hasClass( "invalid"))
+            {
+               this.removeClass('invalid');
+               wasInErrorState = true;
+            }
             this.siblings( ".validationErrorContainer").fadeOut();
+            return wasInErrorState;
          }
  
          function removeSuccessImage()
