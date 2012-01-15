@@ -30,7 +30,7 @@ When you call formError() with {remove:true} the plugin will, by default, replac
 	      successImage: {src:"/img/success.gif"}
 	   });
 
-It is also possible to have error messages wrap onto new lines to prevent error messages being too linear. The plugin will make sure that if an error message exceeds a given number of characters (the default is 30) then a <br/> tag is inserted into the text of the message which will effectively split the error over a new line. To change this character limit :
+It is also possible to have error messages wrap onto new lines to prevent error messages being too linear. The plugin will make sure that if an error message exceeds a given number of characters (the default is 30) then a &lt;br/&gt; tag is inserted into the text of the message which will effectively split the error over a new line. To change this character limit :
 
 ####
 	$("#name").formError( "A user with this name has already been added to the list. Please change the name.", {newLineAtCharacterCount: 25});
