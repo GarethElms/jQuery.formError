@@ -1,4 +1,4 @@
-// jQuery.formError v0.1
+// jQuery.formError v0.2
 //
 // Copyright (C)2012 Gareth Elms
 // Distributed under MIT License
@@ -40,7 +40,7 @@
             {
                if( this.hasClass('invalid')) //Used to be invalid
                {
-                  var img = $( "<img class='successImage' style='position:absolute; right:-20px; top:3px;' src='" + options.successImage.src + "' />");
+                  var img = $( "<img class='successImage' style='position:absolute; right:-20px; top:3px; z-index:9999;' src='" + options.successImage.src + "' />");
                   this.after( img.fadeIn());
                }
                else
@@ -70,8 +70,10 @@
             remove.call( this, {successImage: {disabled:true}}); // Just remove the previous error message if it exists, we are replacing it now
             removeSuccessImage.call( this); // Also remove the success image if present
  
+            options.message = options.message.injectNewLines( options.newLineAtCharacterCount);
+
             var errorDiv =
-               $("<div class='validationErrorContainer' style='position:absolute; left:101%; top:-2px;}'>" +
+               $("<div class='validationErrorContainer' style='position:absolute; left:101%; top:-2px; z-index:99999;'>" +
                    "<canvas width='14' height='14' style='position:absolute; left:-3px; top:7px;' />" +
                       "<div class='validationError' style='border:2px solid #811; border-radius:5px; padding:4px; background-color:#f99; color:#511; position:relative; left:10px; white-space:nowrap;'>" +
                      options.message +
@@ -110,6 +112,7 @@
  
    $.fn.formError.defaultOptions =
       {
+         newLineAtCharacterCount: 30,
          successImage:
          {
             enabled:true,
@@ -117,3 +120,34 @@
          }
       };
 })( jQuery );
+
+
+String.prototype.injectNewLines =
+    function( maxLineLength)
+    {
+        if( typeof( maxLineLength) == "number" && maxLineLength > 0)
+        {
+            var tempMessage = "";
+            var lineLength = 0;
+            var words = this.split( /\s+/);
+            for( var word in words)
+            {
+                tempMessage += words[word];
+                lineLength += words[word].length;
+                if( lineLength > maxLineLength)
+                {
+                    tempMessage += "<br />";
+                    lineLength = 0;
+                }
+                else
+                {
+                    tempMessage += " ";
+                    lineLength ++;
+                }
+            }
+
+            return tempMessage;
+        }
+
+        return this;
+    };
