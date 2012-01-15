@@ -65,7 +65,7 @@ You can use the same technique to globally override any of the default options. 
 # Release notes
 
 ### v0.2
-* Newlines are inserted into error message that are too long
+* Newlines are inserted into error messages that are too long (default is maximum 30 charactere per line)
 * z-index changed to ensure that an error message overlays a success image
 
 ### v0.1
