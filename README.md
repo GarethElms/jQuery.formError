@@ -33,7 +33,9 @@ When you call formError() with {remove:true} the plugin will, by default, replac
 It is also possible to have error messages wrap onto new lines to prevent error messages being too linear. The plugin will make sure that if an error message exceeds a given number of characters (the default is 30) then a &lt;br/&gt; tag is inserted into the text of the message which will effectively split the error over a new line. To change this character limit :
 
 ####
-	$("#name").formError( "A user with this name has already been added to the list. Please change the name.", {newLineAtCharacterCount: 25});
+	$("#name").formError(
+		"A user with this name has already been added to the list. Please change the name.",
+		{newLineAtCharacterCount: 25});
 
 This will ensure that after 25 characters has been reached, a new line is inserted into the error message before it is rendered on the page. To disable this feature, set newLineAtCharacterCount to 0.
 
