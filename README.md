@@ -39,17 +39,17 @@ It is also possible to have error messages wrap onto new lines to prevent error 
 
 This will ensure that after 25 characters has been reached, a new line is inserted into the error message before it is rendered on the page. To disable this feature, set newLineAtCharacterCount to 0.
 
-To disable to validation image functionality globally add this somehwere in your javascript code :
+To globally disable the validation image functionality (so you don't have to pass it into every formError() call) add this somewhere in your javascript code :
 
 ####
 	$.extend( true, $.fn.formError.defaultOptions, {successImage:{enabled:false}});
 
-Or to change the character limit globally :
+And to change the character limit globally :
 
 ####
 	$.extend( true, $.fn.formError.defaultOptions, {successImage:{newLineAtCharacterCount:20}});
 
-You can use the same technique to override any of the default options, which are :
+You can use the same technique to globally override any of the default options. The default options are :
 
 #### Default options
 	$.fn.formError.defaultOptions =
