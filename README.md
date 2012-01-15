@@ -8,26 +8,22 @@ Just include the [jQuery.formError.js file](https://github.com/GarethElms/jQuery
 
 For example, given a html input control :
 
-####
-
+#### HTML control
 <input type="text" id="name" name="name" />
 
 You can display a validation error in one line :
 
-####
-
+#### Display a validation error
 $("#name").formError( "Name cannot be greater than 15 characters long");
 
 To remove the validation error :
 
-####
-
+#### Remove a validation error
 $("#name").formError( {remove:true});
 
 When you call formError() with {remove:true} the plugin will, by default, replace the error with an image that indicates successful validation. This indicates clearly to the user that the error has been corrected. It is web form best practice to do this. The default success image is "success.gif". You can control the url of the success image like this :
 
-####
-
+#### Change the success image
 $("#name").formError(
    {
       remove:true,
@@ -37,10 +33,27 @@ $("#name").formError(
 It is also possible to have error message wrap onto new lines to prevent error messages being too linear. The plugin will make sure that if an error message exceeds a given number of characters (the default is 30) then a <br/> tag is inserted which will split the error over a new line. To change this character limit :
 
 ####
-
 $("#name").formError( "Name cannot be greater than 15 characters long", {newLineAtCharacterCount: 25});
 
 This will ensure that after 25 characters has been reached, a new line is inserted into the error message before it is rendered on the page. To disable this feature, set newLineAtCharacterCount to 0.
+
+To disable to validation image functionality globally add this somehwere in your javascript code :
+
+#### Disable the success image
+$.extend( true, $.fn.formError.defaultOptions, {successImage:{enabled:false}});
+
+You can use the same technique to override any of the default options, which are :
+
+#### Default options
+$.fn.formError.defaultOptions =
+{
+	newLineAtCharacterCount: 30,
+	successImage:
+	{
+		enabled:true,
+		src: "/resources/shared/images/success.gif"
+	}
+};
 
 # Release notes
 
