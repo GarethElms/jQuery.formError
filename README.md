@@ -4,43 +4,48 @@ A small jQuery plugin that lets you add a validation message next to a form cont
 
 ## How to use the plugin
 
-Just include the [jQuery.formError.js file](https://github.com/GarethElms/jQuery.formError/blob/master/jquery.formError.js) in your html page and then call the formError() method on a form control.
+Just include [jQuery.formError.js](https://github.com/GarethElms/jQuery.formError/blob/master/jquery.formError.js) in your html page and then call the formError() method on a form control.
 
 For example, given a html input control :
 
-#### HTML control
+####
 	<input type="text" id="name" name="name" />
 
-You can display a validation error in one line :
+If this has a dodgy value you can display a validation error in one line :
 
-#### Display a validation error
+####
 	$("#name").formError( "Name cannot be greater than 15 characters long");
 
-To remove the validation error :
+Once the user has changed the value and you have successfully revalidated you can remove the validation error like this :
 
-#### Remove a validation error
+####
 	$("#name").formError( {remove:true});
 
-When you call formError() with {remove:true} the plugin will, by default, replace the error with an image that indicates successful validation. This indicates clearly to the user that the error has been corrected. It is web form best practice to do this. The default success image is "success.gif". You can control the url of the success image like this :
+When you call formError() with {remove:true} the plugin will, by default, replace the error with an image that indicates successful validation. The presence of this image clearly confirms that the error has been corrected. It is a web forms best practice to do this. The default src attribute of the success image is "success.gif". You can control the url of the success image like this :
 
-#### Change the success image
+####
 	$("#name").formError(
 	   {
 	      remove:true,
-	      successImage: {src:"img/success.gif"}
+	      successImage: {src:"/img/success.gif"}
 	   });
 
-It is also possible to have error message wrap onto new lines to prevent error messages being too linear. The plugin will make sure that if an error message exceeds a given number of characters (the default is 30) then a <br/> tag is inserted which will split the error over a new line. To change this character limit :
+It is also possible to have error messages wrap onto new lines to prevent error messages being too linear. The plugin will make sure that if an error message exceeds a given number of characters (the default is 30) then a <br/> tag is inserted into the text of the message which will effectively split the error over a new line. To change this character limit :
 
 ####
-	$("#name").formError( "Name cannot be greater than 15 characters long", {newLineAtCharacterCount: 25});
+	$("#name").formError( "A user with this name has already been added to the list. Please change the name.", {newLineAtCharacterCount: 25});
 
 This will ensure that after 25 characters has been reached, a new line is inserted into the error message before it is rendered on the page. To disable this feature, set newLineAtCharacterCount to 0.
 
 To disable to validation image functionality globally add this somehwere in your javascript code :
 
-#### Disable the success image
+####
 	$.extend( true, $.fn.formError.defaultOptions, {successImage:{enabled:false}});
+
+Or to change the character limit globally :
+
+####
+	$.extend( true, $.fn.formError.defaultOptions, {successImage:{newLineAtCharacterCount:20}});
 
 You can use the same technique to override any of the default options, which are :
 
