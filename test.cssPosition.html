@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery Form Error Plugin Demo</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="demo.css" />
+   <script src="lib/jquery-1.7.1.min.js" type="text/javascript"></script>
+   <script src="jquery.formError.js" type="text/javascript"></script>
+   <style type="text/css">
+   div.test {background-color:lightyellow; border:1px solid #bbb; padding:10px; font-size:70%;}
+   p.description {background-color:#eee; padding:4px;}
+   </style>
+</head>
+<body>
+   <div id="container">
+      <h1>jQuery Form Error Plugin - Test Page</h1>
+      <div id="content">
+
+        <a id="showErrors" href="#">Show errors</a>
+        <a id="hideErrors" href="#">Hide errors</a>
+
+        <div class="test" id="test1" style="position:relative; top:20px; left:100px;">
+            <strong>Test 1 : </strong>position:relative; top:20px; left:100px;
+            <p class="description">Relatively positioned nested in standard auto positioned divs</p>
+        </div>
+
+        <div style="position:relative;">
+            <div class="test" id="test3" style="position:absolute; top:10px; left:40px;">
+                <strong>Test 3 : </strong>
+                <p>position:absolute; top:10px; left:40px;</p>
+                <p class="description">In a relative container</p>
+            </div>
+        </div>
+
+      </div>
+   </div>
+   <div id="footer">
+      <a href="https://github.com/GarethElms/jQueryFormErrorPlugin">jQuery Form Error Plugin</a> By <a href="http://www.garethelms.org">Gareth Elms</a> 2012
+   </div>
+
+    <div class="test" id="test2" style="position:absolute; top:100px; left:100px;">
+        <strong>Test 2 : </strong>
+        <p>position:absolute; top:100px; left:100px;</p>
+        <p class="description">Immediately inside &lt;body&gt;</p>
+    </div>
+
+    <div class="test" id="test4" style="position:fixed; top:10px; left:450px; width:200px;">
+        <strong>Test 4 : </strong>
+        <p>position:fixed; top:10px; left:350px; width:300px;</p>
+        <p class="description">Fixed (stationary during scroll)</p>
+    </div>
+
+</body>
+
+<script type="text/javascript">
+$(document).ready(
+   function()
+   {
+      $("#showErrors").click(
+        function( event)
+        {
+            event.preventDefault();
+            $("#test1").formError( "Error message for #test1");
+            $("#test2").formError( "Error message for #test2");
+            $("#test3").formError( "Error message for #test3");
+            $("#test4").formError( "Error message for #test4");
+        })
+       
+    $("#hideErrors").click(
+        function( event)
+        {
+            event.stopPropagation();
+            $("#test1").formError( {remove:true});
+            $("#test2").formError( {remove:true});
+            $("#test3").formError( {remove:true});
+            $("#test4").formError( {remove:true});
+        });
+   });
+</script>
+
+</html>

@@ -64,6 +64,9 @@ You can use the same technique to globally override any of the default options. 
 
 # Release notes
 
+### v0.3
+* Ensure that the error message appears immediately next to the form control regardless of css position
+
 ### v0.2
 * Newlines are inserted into error messages that are too long (default is maximum 30 characters per line)
 * z-index changed to ensure that an error message overlays a success image

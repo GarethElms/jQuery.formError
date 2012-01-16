@@ -1,4 +1,4 @@
-// jQuery.formError v0.2
+// jQuery.formError v0.3
 //
 // Copyright (C)2012 Gareth Elms
 // Distributed under MIT License
@@ -41,6 +41,20 @@
                if( this.hasClass('invalid')) //Used to be invalid
                {
                   var img = $( "<img class='successImage' style='position:absolute; right:-20px; top:3px; z-index:9999;' src='" + options.successImage.src + "' />");
+
+                  var positionMethod = this.css( "position");
+                  if( positionMethod == "relative" || positionMethod == "absolute" || positionMethod == "fixed")
+                  {
+                      img
+                         .css( "left", ((this.position().left + this.outerWidth()) + 3) + "px")
+                         .css( "top", (this.position().top - 3) + "px");
+                  }
+                  else
+                  {
+                      img
+                         .css( "left", ((this.position().left + this.outerWidth()) + 5) + "px")
+                  }
+
                   this.after( img.fadeIn());
                }
                else
@@ -53,7 +67,8 @@
                this.removeClass('invalid');
                wasInErrorState = true;
             }
-            this.siblings( ".validationErrorContainer").fadeOut();
+            this.next(".validationErrorContainer").fadeOut();
+            this.next("img.successImage").next( ".validationErrorContainer").fadeOut();
             return wasInErrorState;
          }
  
@@ -79,10 +94,17 @@
                      options.message +
                    "</div>" +
                  "</div>");
- 
-            if( this.parent().hasClass( "inputContainer") == false)
+
+            var positionMethod = this.css( "position");
+            if( positionMethod == "relative" || positionMethod == "absolute" || positionMethod == "fixed")
             {
-               this.wrap( $("<div class='inputContainer' style='position:relative;'></div>"));
+                errorDiv
+                        .css( "left", ((this.position().left + this.outerWidth()) - 3) + "px")
+                        .css( "top", (this.position().top - 3) + "px");
+            }
+            else if( this.parent().hasClass( "inputContainer") == false)
+            {
+               this.wrap( $("<div class='inputContainer' style='position:relative; width:" + this.width() + "px'></div>"));
             }
  
             this.after( errorDiv.fadeIn()).addClass( "invalid");
